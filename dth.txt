@@ -1,0 +1,24 @@
+#include <DHT.h>
+#include <LiquidCrystal_I2C.h>
+#define DHTPin 2
+                       
+LiquidCrystal_I2C lcd(0x27,16,2);
+DHT dht;
+
+void setup() {
+  dht.setup(DHTPin);  
+  lcd.begin(16,2);                      
+}
+void loop() {
+  float temp = dht.getTemperature();
+  float humi = dht.getHumidity();
+  lcd.setCursor(0,0);
+  lcd.print("Temperature: ");
+  lcd.print(temp);
+  lcd.print(" C");
+  lcd.setCursor(0,1);
+  lcd.print("Humidity: ");
+  lcd.print(humi);
+  lcd.print(" %");
+  delay(2000);
+}
